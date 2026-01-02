@@ -1,57 +1,59 @@
 ﻿@model ThuVien.Models.LoaiSach
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa Loại Sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<div class="page-header" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+    <div class="container">
+        <h2><i class="notika-icon notika-close" style="margin-right: 10px;"></i>Xóa Loại Sách</h2>
+    </div>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>LoaiSach</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MaLoaiSach)
-        </dt>
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="card" style="max-width: 700px; margin: 0 auto; border-left: 5px solid #dc3545;">
+                <div class="card-header" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+                    <i class="notika-icon notika-close" style="margin-right: 8px;"></i>Cảnh Báo Xóa
+                </div>
+                <div class="card-body">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="notika-icon notika-close" style="font-size: 40px; color: white;"></i>
+                        </div>
+                        <h3 style="color: #dc3545; margin-bottom: 10px;">Bạn có chắc chắn muốn xóa?</h3>
+                        <p style="color: #6c757d;">Hành động này không thể hoàn tác. Dữ liệu sẽ bị xóa vĩnh viễn.</p>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaLoaiSach)
-        </dd>
+                    <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 20px; margin-bottom: 30px;">
+                        <h4 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center;">
+                            <i class="notika-icon notika-warning" style="margin-right: 10px;"></i>Thông Tin Sẽ Bị Xóa:
+                        </h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div>
+                                <div style="font-size: 0.85rem; color: #856404; margin-bottom: 5px;">Mã Loại Sách</div>
+                                <div style="font-weight: 600; color: #333;">@Html.DisplayFor(model => model.MaLoaiSach)</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.85rem; color: #856404; margin-bottom: 5px;">Tên Loại Sách</div>
+                                <div style="font-weight: 600; color: #333;">@Html.DisplayFor(model => model.TenLoaiSach)</div>
+                            </div>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TenLoaiSach)
-        </dt>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.TenLoaiSach)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeUpdate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeCreate)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <input type="submit" value="Xác Nhận Xóa" class="btn btn-danger" style="min-width: 150px; color: #000;" />
+                            @Html.ActionLink("Hủy Bỏ", "Index", null, new { @class = "btn btn-secondary", style = "min-width: 150px;" })
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>

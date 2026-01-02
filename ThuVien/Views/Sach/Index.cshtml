@@ -1,100 +1,119 @@
 ﻿@model IEnumerable<ThuVien.Models.Sach>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-edit" style="margin-right: 10px;"></i>Danh Sách Sách</h2>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LoaiSach1.MaLoaiSach)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NXB1.MaNXB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhieuMuon.MaMuon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TacGia1.MaTacGia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ViTri1.MaViTri)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSach)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenSach)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NamXB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgonNgu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </th>
-        <th></th>
-    </tr>
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #667eea;">Quản lý sách</h3>
+                @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary", style = "color: #000;" })
+            </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiSach1.MaLoaiSach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NXB1.MaNXB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhieuMuon.MaMuon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TacGia1.MaTacGia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ViTri1.MaViTri)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaSach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NamXB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgonNgu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeUpdate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+            <div class="table-wrapper">
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã Sách</th>
+                                <th>Tên Sách</th>
+                                <th>Loại Sách</th>
+                                <th>NXB</th>
+                                <th>Tác Giả</th>
+                                <th>Vị Trí</th>
+                                <th>Năm XB</th>
+                                <th>Số Lượng</th>
+                                <th>Ngôn Ngữ</th>
+                                <th style="text-align: center;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><strong>@Html.DisplayFor(modelItem => item.MaSach)</strong></td>
+                                    <td style="max-width: 200px;">
+                                        <div style="font-weight: 500; color: #333;">@Html.DisplayFor(modelItem => item.TenSach)</div>
+                                    </td>
+                                    <td>
+                                        @if (item.LoaiSach1 != null)
+                                        {
+                                            <span class="badge badge-primary">@Html.DisplayFor(modelItem => item.LoaiSach1.MaLoaiSach)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.NXB1 != null)
+                                        {
+                                            <span class="badge badge-warning">@Html.DisplayFor(modelItem => item.NXB1.MaNXB)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.TacGia1 != null)
+                                        {
+                                            <span class="badge badge-info">@Html.DisplayFor(modelItem => item.TacGia1.MaTacGia)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.ViTri1 != null)
+                                        {
+                                            <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ViTri1.MaViTri)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.NamXB)</td>
+                                    <td>
+                                        <span class="badge @(item.SoLuong > 0 ? "badge-success" : "badge-danger")">
+                                            @Html.DisplayFor(modelItem => item.SoLuong)
+                                        </span>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.NgonNgu)</td>
+                                    <td>
+                                        <div class="action-links">
+                                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn-edit" })
+                                            @Html.ActionLink("Chi Tiết", "Details", new { id = item.ID }, new { @class = "btn-details" })
+                                            @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn-delete" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <i class="notika-icon notika-edit"></i>
+                        <h3>Chưa có dữ liệu</h3>
+                        <p>Hãy thêm sách mới để bắt đầu quản lý.</p>
+                        @Html.ActionLink("Thêm Sách", "Create", null, new { @class = "btn btn-primary mt-3" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

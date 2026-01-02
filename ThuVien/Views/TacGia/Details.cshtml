@@ -1,59 +1,71 @@
 ﻿@model ThuVien.Models.TacGia
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi Tiết Tác Giả";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>TacGia</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MaTacGia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaTacGia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TenTacGia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenTacGia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeUpdate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeCreate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
-
-    </dl>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-app" style="margin-right: 10px;"></i>Chi Tiết Tác Giả</h2>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="card" style="max-width: 700px; margin: 0 auto;">
+                <div class="card-header">
+                    <i class="notika-icon notika-app" style="margin-right: 8px;"></i>Thông Tin Chi Tiết
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); padding: 20px; border-radius: 8px; color: white;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <i class="notika-icon notika-id-card" style="font-size: 24px; margin-right: 10px;"></i>
+                                <div>
+                                    <div style="font-size: 0.85rem; opacity: 0.9;">Mã Tác Giả</div>
+                                    <div style="font-size: 1.25rem; font-weight: 600;">@Html.DisplayFor(model => model.MaTacGia)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 8px; color: white;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <i class="notika-icon notika-app" style="font-size: 24px; margin-right: 10px;"></i>
+                                <div>
+                                    <div style="font-size: 0.85rem; opacity: 0.9;">Tên Tác Giả</div>
+                                    <div style="font-size: 1.25rem; font-weight: 600;">@Html.DisplayFor(model => model.TenTacGia)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                        <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Địa Chỉ</div>
+                        <div style="font-weight: 500; color: #333; font-size: 1rem;">@Html.DisplayFor(model => model.DiaChi)</div>
+                    </div>
+
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #667eea;">
+                                <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Ngày Tạo</div>
+                                <div style="font-weight: 500; color: #333;">@(Model.TimeCreate?.ToString("dd/MM/yyyy HH:mm") ?? "-")</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #28a745;">
+                                <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Ngày Cập Nhật</div>
+                                <div style="font-weight: 500; color: #333;">@(Model.TimeUpdate?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa cập nhật")</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                        @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.ID }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

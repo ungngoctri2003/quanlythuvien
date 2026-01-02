@@ -1,58 +1,75 @@
 ﻿@model IEnumerable<ThuVien.Models.NXB>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Nhà Xuất Bản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-bar-chart" style="margin-right: 10px;"></i>Danh Sách Nhà Xuất Bản</h2>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaNXB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenNXB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </th>
-        <th></th>
-    </tr>
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #667eea;">Quản lý nhà xuất bản</h3>
+                @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary", style = "color: #000;" })
+            </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaNXB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenNXB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeUpdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChi)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+            <div class="table-wrapper">
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã NXB</th>
+                                <th>Tên NXB</th>
+                                <th>Địa Chỉ</th>
+                                <th>Ngày Tạo</th>
+                                <th>Ngày Cập Nhật</th>
+                                <th style="text-align: center;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-warning" style="font-size: 0.9rem;">@Html.DisplayFor(modelItem => item.MaNXB)</span>
+                                    </td>
+                                    <td>
+                                        <div style="font-weight: 500; color: #333; font-size: 1rem;">@Html.DisplayFor(modelItem => item.TenNXB)</div>
+                                    </td>
+                                    <td style="max-width: 200px;">
+                                        <div style="color: #6c757d;">@Html.DisplayFor(modelItem => item.DiaChi)</div>
+                                    </td>
+                                    <td>@(item.TimeCreate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                    <td>@(item.TimeUpdate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                    <td>
+                                        <div class="action-links">
+                                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn-edit" })
+                                            @Html.ActionLink("Chi Tiết", "Details", new { id = item.ID }, new { @class = "btn-details" })
+                                            @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn-delete" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <i class="notika-icon notika-bar-chart"></i>
+                        <h3>Chưa có dữ liệu</h3>
+                        <p>Hãy thêm nhà xuất bản mới để bắt đầu quản lý.</p>
+                        @Html.ActionLink("Thêm NXB", "Create", null, new { @class = "btn btn-primary mt-3" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

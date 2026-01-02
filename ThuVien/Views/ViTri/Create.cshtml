@@ -1,76 +1,63 @@
 ﻿@model ThuVien.Models.ViTri
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm Vị Trí";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-plus" style="margin-right: 10px;"></i>Thêm Vị Trí Mới</h2>
+    </div>
+</div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ViTri</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaViTri, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaViTri, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaViTri, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ngan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ngan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ngan, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <i class="notika-icon notika-form" style="margin-right: 8px;"></i>Thông Tin Vị Trí
+                    </div>
+                    <div class="card-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom: 20px;" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ke, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ke, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ke, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MaViTri, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.MaViTri, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập mã vị trí" } })
+                                @Html.ValidationMessageFor(model => model.MaViTri, "", new { @class = "text-danger" })
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TimeUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TimeUpdate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TimeUpdate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Khu, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.Khu, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập khu" } })
+                                @Html.ValidationMessageFor(model => model.Khu, "", new { @class = "text-danger" })
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TimeCreate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TimeCreate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TimeCreate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Ngan, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.Ngan, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập ngăn" } })
+                                @Html.ValidationMessageFor(model => model.Ngan, "", new { @class = "text-danger" })
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Khu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Khu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Khu, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Ke, htmlAttributes: new { @class = "form-label" })
+                                @Html.EditorFor(model => model.Ke, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập kệ" } })
+                                @Html.ValidationMessageFor(model => model.Ke, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                        <div style="display: flex; gap: 10px; margin-top: 30px;">
+                            <input type="submit" value="Thêm Mới" class="btn btn-success" style="color: #000;" />
+                            @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-secondary" })
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

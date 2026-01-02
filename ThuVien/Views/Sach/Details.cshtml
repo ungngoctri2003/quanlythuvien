@@ -1,115 +1,159 @@
 ﻿@model ThuVien.Models.Sach
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi Tiết Sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Sach</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LoaiSach1.MaLoaiSach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LoaiSach1.MaLoaiSach)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NXB1.MaNXB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NXB1.MaNXB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhieuMuon.MaMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhieuMuon.MaMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TacGia1.MaTacGia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TacGia1.MaTacGia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ViTri1.MaViTri)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ViTri1.MaViTri)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaSach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaSach)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TenSach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenSach)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NamXB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NamXB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoLuong)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgonNgu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgonNgu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeCreate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeUpdate)
-        </dd>
-
-    </dl>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-edit" style="margin-right: 10px;"></i>Chi Tiết Sách</h2>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="card" style="max-width: 900px; margin: 0 auto;">
+                <div class="card-header">
+                    <i class="notika-icon notika-edit" style="margin-right: 8px;"></i>Thông Tin Chi Tiết
+                </div>
+                <div class="card-body">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; color: white; margin-bottom: 25px;">
+                        <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 8px;">Mã Sách</div>
+                        <div style="font-size: 1.5rem; font-weight: 600;">@Html.DisplayFor(model => model.MaSach)</div>
+                        <div style="font-size: 1.1rem; margin-top: 10px; opacity: 0.95;">@Html.DisplayFor(model => model.TenSach)</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <i class="notika-icon notika-book" style="font-size: 20px; color: #667eea; margin-right: 10px;"></i>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Loại Sách</div>
+                                    <div style="font-weight: 600; color: #333;">
+                                        @if (Model.LoaiSach1 != null)
+                                        {
+                                            <span class="badge badge-primary">@Html.DisplayFor(model => model.LoaiSach1.MaLoaiSach)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <i class="notika-icon notika-bar-chart" style="font-size: 20px; color: #ffc107; margin-right: 10px;"></i>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Nhà Xuất Bản</div>
+                                    <div style="font-weight: 600; color: #333;">
+                                        @if (Model.NXB1 != null)
+                                        {
+                                            <span class="badge badge-warning">@Html.DisplayFor(model => model.NXB1.MaNXB)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <i class="notika-icon notika-app" style="font-size: 20px; color: #17a2b8; margin-right: 10px;"></i>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Tác Giả</div>
+                                    <div style="font-weight: 600; color: #333;">
+                                        @if (Model.TacGia1 != null)
+                                        {
+                                            <span class="badge badge-info">@Html.DisplayFor(model => model.TacGia1.MaTacGia)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #28a745;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <i class="notika-icon notika-form" style="font-size: 20px; color: #28a745; margin-right: 10px;"></i>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Vị Trí</div>
+                                    <div style="font-weight: 600; color: #333;">
+                                        @if (Model.ViTri1 != null)
+                                        {
+                                            <span class="badge badge-success">@Html.DisplayFor(model => model.ViTri1.MaViTri)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 6px; border-left: 4px solid #ffc107;">
+                            <div style="font-size: 0.85rem; color: #856404; margin-bottom: 5px;">Năm Xuất Bản</div>
+                            <div style="font-weight: 600; color: #333; font-size: 1.1rem;">@Html.DisplayFor(model => model.NamXB)</div>
+                        </div>
+
+                        <div style="background: @(Model.SoLuong > 0 ? "#d4edda" : "#f8d7da"); padding: 15px; border-radius: 6px; border-left: 4px solid @(Model.SoLuong > 0 ? "#28a745" : "#dc3545");">
+                            <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Số Lượng</div>
+                            <div style="font-weight: 600; color: #333; font-size: 1.1rem;">
+                                <span class="badge @(Model.SoLuong > 0 ? "badge-success" : "badge-danger")" style="font-size: 1rem;">
+                                    @Html.DisplayFor(model => model.SoLuong) cuốn
+                                </span>
+                            </div>
+                        </div>
+
+                        <div style="background: #d1ecf1; padding: 15px; border-radius: 6px; border-left: 4px solid #17a2b8;">
+                            <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Ngôn Ngữ</div>
+                            <div style="font-weight: 600; color: #333;">@Html.DisplayFor(model => model.NgonNgu)</div>
+                        </div>
+
+                        @if (Model.PhieuMuon != null)
+                        {
+                            <div style="background: #f8d7da; padding: 15px; border-radius: 6px; border-left: 4px solid #dc3545;">
+                                <div style="font-size: 0.85rem; color: #721c24; margin-bottom: 5px;">Đang Mượn</div>
+                                <div style="font-weight: 600; color: #721c24;">
+                                    <span class="badge badge-danger">@Html.DisplayFor(model => model.PhieuMuon.MaMuon)</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #667eea;">
+                                <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Ngày Tạo</div>
+                                <div style="font-weight: 500; color: #333;">@(Model.TimeCreate?.ToString("dd/MM/yyyy HH:mm") ?? "-")</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #28a745;">
+                                <div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 5px;">Ngày Cập Nhật</div>
+                                <div style="font-weight: 500; color: #333;">@(Model.TimeUpdate?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa cập nhật")</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                        @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.ID }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

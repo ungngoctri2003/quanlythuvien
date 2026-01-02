@@ -1,76 +1,102 @@
 ﻿@model IEnumerable<ThuVien.Models.PhieuMuon>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Phiếu Mượn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-calendar" style="margin-right: 10px;"></i>Danh Sách Phiếu Mượn</h2>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SinhVien.MaSV)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaMuon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayMuon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayTra)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HinhThuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoNgayMuon)
-        </th>
-        <th></th>
-    </tr>
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #667eea;">Quản lý phiếu mượn</h3>
+                @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary", style = "color: #000;" })
+            </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SinhVien.MaSV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaMuon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayMuon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayTra)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhThuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeUpdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoNgayMuon)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+            <div class="table-wrapper">
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã Mượn</th>
+                                <th>Mã Sinh Viên</th>
+                                <th>Ngày Mượn</th>
+                                <th>Ngày Trả</th>
+                                <th>Số Ngày Mượn</th>
+                                <th>Hình Thức</th>
+                                <th>Ngày Tạo</th>
+                                <th style="text-align: center;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var isOverdue = item.NgayTra.HasValue && item.NgayTra.Value < DateTime.Now;
+                                <tr style="@(isOverdue ? "background-color: #fff3cd;" : "")">
+                                    <td>
+                                        <span class="badge badge-primary" style="font-size: 0.9rem;">@Html.DisplayFor(modelItem => item.MaMuon)</span>
+                                    </td>
+                                    <td>
+                                        @if (item.SinhVien != null)
+                                        {
+                                            <span class="badge badge-info">@Html.DisplayFor(modelItem => item.SinhVien.MaSV)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div style="font-weight: 500; color: #333;">@(item.NgayMuon?.ToString("dd/MM/yyyy") ?? "-")</div>
+                                    </td>
+                                    <td>
+                                        @if (item.NgayTra.HasValue)
+                                        {
+                                            <div style="font-weight: 500; color: @(isOverdue ? "#dc3545" : "#28a745");">
+                                                @item.NgayTra.Value.ToString("dd/MM/yyyy")
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning">Chưa trả</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-secondary">@Html.DisplayFor(modelItem => item.SoNgayMuon) ngày</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-info">@Html.DisplayFor(modelItem => item.HinhThuc)</span>
+                                    </td>
+                                    <td>@(item.TimeCreate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                    <td>
+                                        <div class="action-links">
+                                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn-edit" })
+                                            @Html.ActionLink("Chi Tiết", "Details", new { id = item.ID }, new { @class = "btn-details" })
+                                            @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn-delete" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <i class="notika-icon notika-calendar"></i>
+                        <h3>Chưa có dữ liệu</h3>
+                        <p>Hãy thêm phiếu mượn mới để bắt đầu quản lý.</p>
+                        @Html.ActionLink("Thêm Phiếu Mượn", "Create", null, new { @class = "btn btn-primary mt-3" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

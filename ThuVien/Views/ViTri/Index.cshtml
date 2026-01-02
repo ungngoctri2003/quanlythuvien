@@ -1,64 +1,79 @@
 ﻿@model IEnumerable<ThuVien.Models.ViTri>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Vị Trí";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <div class="container">
+        <h2><i class="notika-icon notika-form" style="margin-right: 10px;"></i>Danh Sách Vị Trí</h2>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaViTri)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ngan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ke)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeUpdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Khu)
-        </th>
-        <th></th>
-    </tr>
+<div class="page-container">
+    <div class="container">
+        <div class="content-wrapper">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #667eea;">Quản lý vị trí sách</h3>
+                @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary", style = "color: #000;" })
+            </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaViTri)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ngan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ke)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeUpdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Khu)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+            <div class="table-wrapper">
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mã Vị Trí</th>
+                                <th>Khu</th>
+                                <th>Ngăn</th>
+                                <th>Kệ</th>
+                                <th>Ngày Tạo</th>
+                                <th>Ngày Cập Nhật</th>
+                                <th style="text-align: center;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-success" style="font-size: 0.9rem;">@Html.DisplayFor(modelItem => item.MaViTri)</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-secondary">@Html.DisplayFor(modelItem => item.Khu)</span>
+                                    </td>
+                                    <td>
+                                        <div style="font-weight: 500; color: #333;">@Html.DisplayFor(modelItem => item.Ngan)</div>
+                                    </td>
+                                    <td>
+                                        <div style="font-weight: 500; color: #333;">@Html.DisplayFor(modelItem => item.Ke)</div>
+                                    </td>
+                                    <td>@(item.TimeCreate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                    <td>@(item.TimeUpdate?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                    <td>
+                                        <div class="action-links">
+                                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn-edit" })
+                                            @Html.ActionLink("Chi Tiết", "Details", new { id = item.ID }, new { @class = "btn-details" })
+                                            @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn-delete" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <i class="notika-icon notika-form"></i>
+                        <h3>Chưa có dữ liệu</h3>
+                        <p>Hãy thêm vị trí mới để bắt đầu quản lý.</p>
+                        @Html.ActionLink("Thêm Vị Trí", "Create", null, new { @class = "btn btn-primary mt-3" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
