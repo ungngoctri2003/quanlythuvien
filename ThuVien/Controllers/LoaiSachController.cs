@@ -115,7 +115,7 @@ namespace ThuVien.Controllers
         {
             LoaiSach loaiSach = db.LoaiSaches.Find(id);
             db.LoaiSaches.Remove(loaiSach);
-            db.SaveChanges();
+           db.SaveChanges();
             return RedirectToAction("Index");
         }
 
