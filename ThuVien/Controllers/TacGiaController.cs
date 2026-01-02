@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ThuVien.Models;
+using PagedList;
 
 namespace ThuVien.Controllers
 {
@@ -15,9 +16,12 @@ namespace ThuVien.Controllers
         private Model1 db = new Model1();
 
         // GET: TacGia
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.TacGias.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            var tacGias = db.TacGias.OrderBy(t => t.ID);
+            return View(tacGias.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: TacGia/Details/5

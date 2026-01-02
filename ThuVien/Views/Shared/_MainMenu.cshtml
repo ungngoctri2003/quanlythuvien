@@ -33,41 +33,263 @@
     .notika-main-menu-dropdown a:hover::before {
         left: 100%;
     }
+    
+    /* Responsive Menu Styles */
+    .notika-menu-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        flex-wrap: nowrap !important;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .notika-menu-wrap li {
+        display: inline-block;
+        float: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .notika-menu-wrap li a {
+        white-space: nowrap;
+        font-size: 0.875rem;
+        padding: 10px 12px;
+        display: inline-block;
+    }
+    
+    .main-menu-area {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .main-menu-area .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Responsive Grid Layout */
+    .notika-main-menu-dropdown {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .notika-main-menu-dropdown li {
+        width: 100%;
+        min-width: 0;
+    }
+    
+    .notika-main-menu-dropdown li a {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Mobile and Tablet Responsive */
+    @@media (max-width: 991.98px) {
+        .main-menu-area {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .notika-menu-wrap {
+            padding: 8px 0;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #667eea #f8f9fa;
+        }
+        
+        .notika-menu-wrap::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .notika-menu-wrap::-webkit-scrollbar-track {
+            background: #f8f9fa;
+            border-radius: 3px;
+        }
+        
+        .notika-menu-wrap::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+        
+        .notika-menu-wrap li a {
+            font-size: 0.8rem;
+            padding: 8px 10px;
+            margin: 0 3px;
+        }
+        
+        .notika-menu-wrap li a i {
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .custom-menu-content {
+            margin-top: 15px !important;
+        }
+        
+        .custom-menu-content > div {
+            padding: 15px !important;
+        }
+        
+        .notika-main-menu-dropdown {
+            grid-template-columns: 1fr !important;
+            gap: 10px;
+            width: 100% !important;
+        }
+        
+        .notika-main-menu-dropdown li {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            flex: none !important;
+        }
+        
+        .notika-main-menu-dropdown li a {
+            width: 100% !important;
+            max-width: 100% !important;
+            text-align: center;
+            padding: 12px 15px;
+            font-size: 0.875rem;
+            box-sizing: border-box;
+        }
+        
+        .main-menu-area .container {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .custom-menu-content > div {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+    }
+    
+    @@media (max-width: 767.98px) {
+        .notika-menu-wrap li a {
+            font-size: 0.75rem;
+            padding: 6px 8px;
+            margin: 0 2px;
+        }
+        
+        .notika-menu-wrap li a i {
+            margin-right: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .custom-menu-content > div {
+            padding: 10px !important;
+        }
+        
+        .notika-main-menu-dropdown li a {
+            padding: 10px 12px;
+            font-size: 0.8rem;
+        }
+    }
+    
+    @@media (min-width: 992px) and (max-width: 1199.98px) {
+        .notika-menu-wrap li a {
+            font-size: 0.85rem;
+            padding: 10px 12px;
+        }
+        
+        .notika-main-menu-dropdown {
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)) !important;
+            width: 100%;
+        }
+        
+        .notika-main-menu-dropdown li {
+            min-width: 0;
+            max-width: 100%;
+        }
+        
+        .notika-main-menu-dropdown li a {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+    }
 </style>
 <div class="main-menu-area mg-tb-40">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro" style="background: #f8f9fa; border-radius: 8px; padding: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <li class="active">
+                @{
+                    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+                    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+                    
+                    // Xác định tab nào sẽ active dựa trên controller
+                    string activeTab = "Home";
+                    if (currentController.Equals("LoaiSach", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "mailbox";
+                    }
+                    else if (currentController.Equals("Sach", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "Interface";
+                    }
+                    else if (currentController.Equals("NXB", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "Charts";
+                    }
+                    else if (currentController.Equals("PhieuMuon", StringComparison.OrdinalIgnoreCase) || 
+                             currentController.Equals("SinhVien", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "Tables";
+                    }
+                    else if (currentController.Equals("ViTri", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "Forms";
+                    }
+                    else if (currentController.Equals("TacGia", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "Appviews";
+                    }
+                    else if (currentController.Equals("User", StringComparison.OrdinalIgnoreCase))
+                    {
+                        activeTab = "Page";
+                    }
+                }
+                <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro" style="background: #f8f9fa; border-radius: 8px; padding: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-wrap: nowrap;">
+                    <li class="@(activeTab == "Home" ? "active" : "")">
                         <a data-toggle="tab" href="#Home" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-house" style="margin-right: 8px;"></i> Home</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "mailbox" ? "active" : "")">
                         <a data-toggle="tab" href="#mailbox" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-book" style="margin-right: 8px;"></i> Quản Lý Loại Sách</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "Interface" ? "active" : "")">
                         <a data-toggle="tab" href="#Interface" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-edit" style="margin-right: 8px;"></i> Quản Lý Sách</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "Charts" ? "active" : "")">
                         <a data-toggle="tab" href="#Charts" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-bar-chart" style="margin-right: 8px;"></i> Quản Lý NXB</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "Tables" ? "active" : "")">
                         <a data-toggle="tab" href="#Tables" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-windows" style="margin-right: 8px;"></i> Quản Lý Mượn</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "Forms" ? "active" : "")">
                         <a data-toggle="tab" href="#Forms" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-form" style="margin-right: 8px;"></i> Quản Lý Vị Trí</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "Appviews" ? "active" : "")">
                         <a data-toggle="tab" href="#Appviews" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-app" style="margin-right: 8px;"></i> Quản Lý Tác Giả</a>
                     </li>
-                    <li>
+                    <li class="@(activeTab == "Page" ? "active" : "")">
                         <a data-toggle="tab" href="#Page" style="border-radius: 6px; margin: 0 5px; transition: all 0.3s ease;"><i class="notika-icon notika-support" style="margin-right: 8px;"></i> Quản Lý Tài Khoản</a>
                     </li>
                 </ul>
                 <div class="tab-content custom-menu-content" style="margin-top: 20px;">
-                    <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
+                    <div id="Home" class="tab-pane @(activeTab == "Home" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; list-style: none; padding: 0; margin: 0;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li style="display: block;">
+                                    <a href="/Home/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; border-left: 4px solid #667eea; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); font-weight: 500;">
+                                        <i class="notika-icon notika-bar-chart" style="margin-right: 10px;"></i> Trang Thống Kê
+                                    </a>
+                                </li>
                                 <li style="display: block;">
                                     <a href="/LoaiSach/Index" style="display: block; padding: 15px 20px; background: #f8f9fa; border-radius: 6px; color: #333; text-decoration: none; transition: all 0.3s ease; border-left: 4px solid #007bff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                                         <i class="notika-icon notika-book" style="margin-right: 10px; color: #007bff;"></i> Danh Sách Loại Sách
@@ -111,15 +333,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="mailbox" class="tab-pane @(activeTab == "mailbox" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-                                <li style="flex: 1; min-width: 200px;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li>
                                     <a href="/LoaiSach/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-book" style="margin-right: 8px;"></i> Danh sách
                                     </a>
                                 </li>
-                                <li style="flex: 1; min-width: 200px;">
+                                <li>
                                     <a href="/LoaiSach/Create" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(245, 87, 108, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-plus" style="margin-right: 8px;"></i> Thêm mới
                                     </a>
@@ -127,15 +349,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Interface" class="tab-pane @(activeTab == "Interface" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-                                <li style="flex: 1; min-width: 200px;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li>
                                     <a href="/Sach/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-edit" style="margin-right: 8px;"></i> Danh sách
                                     </a>
                                 </li>
-                                <li style="flex: 1; min-width: 200px;">
+                                <li>
                                     <a href="/Sach/Create" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(245, 87, 108, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-plus" style="margin-right: 8px;"></i> Thêm mới
                                     </a>
@@ -143,15 +365,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Charts" class="tab-pane @(activeTab == "Charts" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-                                <li style="flex: 1; min-width: 200px;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li>
                                     <a href="/NXB/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-bar-chart" style="margin-right: 8px;"></i> Danh sách
                                     </a>
                                 </li>
-                                <li style="flex: 1; min-width: 200px;">
+                                <li>
                                     <a href="/NXB/Create" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(245, 87, 108, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-plus" style="margin-right: 8px;"></i> Thêm mới
                                     </a>
@@ -159,9 +381,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Tables" class="tab-pane @(activeTab == "Tables" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; list-style: none; padding: 0; margin: 0;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
                                 <li>
                                     <a href="/PhieuMuon/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-windows" style="margin-right: 8px;"></i> Danh sách
@@ -185,15 +407,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Forms" class="tab-pane @(activeTab == "Forms" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-                                <li style="flex: 1; min-width: 200px;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li>
                                     <a href="/ViTri/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-form" style="margin-right: 8px;"></i> Danh sách
                                     </a>
                                 </li>
-                                <li style="flex: 1; min-width: 200px;">
+                                <li>
                                     <a href="/ViTri/Create" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(245, 87, 108, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-plus" style="margin-right: 8px;"></i> Thêm mới
                                     </a>
@@ -201,15 +423,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Appviews" class="tab-pane @(activeTab == "Appviews" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-                                <li style="flex: 1; min-width: 200px;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li>
                                     <a href="/TacGia/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-app" style="margin-right: 8px;"></i> Danh sách
                                     </a>
                                 </li>
-                                <li style="flex: 1; min-width: 200px;">
+                                <li>
                                     <a href="/TacGia/Create" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(245, 87, 108, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-plus" style="margin-right: 8px;"></i> Thêm mới
                                     </a>
@@ -217,15 +439,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Page" class="tab-pane @(activeTab == "Page" ? "in active" : "") notika-tab-menu-bg animated flipInX">
                         <div style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
-                            <ul class="notika-main-menu-dropdown" style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-                                <li style="flex: 1; min-width: 200px;">
+                            <ul class="notika-main-menu-dropdown" style="list-style: none; padding: 0; margin: 0;">
+                                <li>
                                     <a href="/User/Index" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-support" style="margin-right: 8px;"></i> Danh sách
                                     </a>
                                 </li>
-                                <li style="flex: 1; min-width: 200px;">
+                                <li>
                                     <a href="/User/Create" style="display: block; padding: 15px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 6px; color: #fff; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(245, 87, 108, 0.3); text-align: center; font-weight: 500;">
                                         <i class="notika-icon notika-plus" style="margin-right: 8px;"></i> Thêm mới
                                     </a>
@@ -239,3 +461,12 @@
     </div>
 </div>
 <!-- Main Menu area End-->
+<script>
+    $(document).ready(function() {
+        // Tự động mở tab tương ứng với controller hiện tại
+        var activeTab = '@Html.Raw(activeTab)';
+        if (activeTab && activeTab !== '') {
+            $('a[href="#' + activeTab + '"]').tab('show');
+        }
+    });
+</script>

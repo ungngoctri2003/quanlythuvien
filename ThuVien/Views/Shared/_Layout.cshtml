@@ -72,12 +72,40 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="#"><img src="~/Assets/img/logo/logo.png" alt="" /></a>
+                        <a href="@Url.Action("Index", "Home")" class="logo-link">
+                            <img src="~/Assets/img/logo/logo.png" alt="Thư Viện" class="logo-img" />
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="header-top-menu" style="text-align: right;">
-                        <!-- Header menu area - có thể thêm các menu khác ở đây -->
+                    <div class="header-top-menu">
+                        @if (Session["ID"] != null)
+                        {
+                            <div class="header-user-section">
+                                <div class="user-info-card">
+                                    <div class="user-avatar">
+                                        <i class="notika-icon notika-support"></i>
+                                    </div>
+                                    <div class="user-details">
+                                        <span class="user-greeting">Xin chào,</span>
+                                        <span class="user-name">@Session["FullName"]</span>
+                                    </div>
+                                </div>
+                                <a href="@Url.Action("Logout", "Home")" class="btn-logout" title="Đăng xuất">
+                                    <i class="notika-icon notika-next"></i>
+                                    <span class="logout-text">Đăng Xuất</span>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="header-auth-section">
+                                <a href="@Url.Action("Login", "Home")" class="btn-login">
+                                    <i class="notika-icon notika-support"></i>
+                                    <span>Đăng Nhập</span>
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -85,6 +113,104 @@
     </div>
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
+    <style>
+        /* Mobile Menu Responsive Styles */
+        .mobile-menu-area {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .mobile-menu-area .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            box-sizing: border-box;
+        }
+        
+        .mobile-menu-area .row {
+            margin-left: 0;
+            margin-right: 0;
+            width: 100%;
+        }
+        
+        .mobile-menu-area [class*="col-"] {
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .mobile-menu {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .mobile-menu-nav {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .mobile-menu-nav li {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .mobile-menu-nav li a {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            white-space: normal;
+            padding: 12px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .mobile-menu-nav .dropdown-header-top {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .mobile-menu-nav .dropdown-header-top li {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .mobile-menu-nav .dropdown-header-top li a {
+            width: 100%;
+            max-width: 100%;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+        }
+        
+        @@media (max-width: 575.98px) {
+            .mobile-menu-area .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .mobile-menu-nav li a {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .mobile-menu-nav .dropdown-header-top li a {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        @@media (min-width: 576px) and (max-width: 767.98px) {
+            .mobile-menu-nav li a {
+                padding: 11px 14px;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
     <div class="mobile-menu-area">
         <div class="container">
             <div class="row">
@@ -93,115 +219,67 @@
                         <nav id="dropdown">
                             <ul class="mobile-menu-nav">
                                 <li>
-                                    <a data-toggle="collapse" data-target="#Charts" href="#">Home</a>
-                                    <ul class="collapse dropdown-header-top">
-                                        <li><a href="index.html">Dashboard One</a></li>
-                                        <li><a href="index-2.html">Dashboard Two</a></li>
-                                        <li><a href="index-3.html">Dashboard Three</a></li>
-                                        <li><a href="index-4.html">Dashboard Four</a></li>
-                                        <li><a href="analytics.html">Analytics</a></li>
-                                        <li><a href="widgets.html">Widgets</a></li>
+                                    <a data-toggle="collapse" data-target="#mobile-home" href="#"><i class="notika-icon notika-house" style="margin-right: 8px;"></i>Trang Chủ</a>
+                                    <ul id="mobile-home" class="collapse dropdown-header-top">
+                                        <li><a href="/LoaiSach/Index"><i class="notika-icon notika-book" style="margin-right: 8px;"></i>Danh Sách Loại Sách</a></li>
+                                        <li><a href="/Sach/Index"><i class="notika-icon notika-edit" style="margin-right: 8px;"></i>Danh Sách Sách</a></li>
+                                        <li><a href="/NXB/Index"><i class="notika-icon notika-bar-chart" style="margin-right: 8px;"></i>Danh Sách Nhà Xuất Bản</a></li>
+                                        <li><a href="/ViTri/Index"><i class="notika-icon notika-form" style="margin-right: 8px;"></i>Danh Sách Vị Trí</a></li>
+                                        <li><a href="/TacGia/Index"><i class="notika-icon notika-app" style="margin-right: 8px;"></i>Danh Sách Tác Giả</a></li>
+                                        <li><a href="/PhieuMuon/Index"><i class="notika-icon notika-windows" style="margin-right: 8px;"></i>Danh Sách Mượn</a></li>
+                                        <li><a href="/SinhVien/Index"><i class="notika-icon notika-menus" style="margin-right: 8px;"></i>Danh Sách Sinh Viên</a></li>
+                                        <li><a href="/User/Index"><i class="notika-icon notika-support" style="margin-right: 8px;"></i>Danh Sách User</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#demoevent" href="#">Email</a>
-                                    <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="inbox.html">Inbox</a></li>
-                                        <li><a href="view-email.html">View Email</a></li>
-                                        <li><a href="compose-email.html">Compose Email</a></li>
+                                    <a data-toggle="collapse" data-target="#mobile-loaisach" href="#"><i class="notika-icon notika-book" style="margin-right: 8px;"></i>Quản Lý Loại Sách</a>
+                                    <ul id="mobile-loaisach" class="collapse dropdown-header-top">
+                                        <li><a href="/LoaiSach/Index">Danh Sách</a></li>
+                                        <li><a href="/LoaiSach/Create">Thêm Mới</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#democrou" href="#">Interface</a>
-                                    <ul id="democrou" class="collapse dropdown-header-top">
-                                        <li><a href="animations.html">Animations</a></li>
-                                        <li><a href="google-map.html">Google Map</a></li>
-                                        <li><a href="data-map.html">Data Maps</a></li>
-                                        <li><a href="code-editor.html">Code Editor</a></li>
-                                        <li><a href="image-cropper.html">Images Cropper</a></li>
-                                        <li><a href="wizard.html">Wizard</a></li>
+                                    <a data-toggle="collapse" data-target="#mobile-sach" href="#"><i class="notika-icon notika-edit" style="margin-right: 8px;"></i>Quản Lý Sách</a>
+                                    <ul id="mobile-sach" class="collapse dropdown-header-top">
+                                        <li><a href="/Sach/Index">Danh Sách</a></li>
+                                        <li><a href="/Sach/Create">Thêm Mới</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#demolibra" href="#">Charts</a>
-                                    <ul id="demolibra" class="collapse dropdown-header-top">
-                                        <li><a href="flot-charts.html">Flot Charts</a></li>
-                                        <li><a href="bar-charts.html">Bar Charts</a></li>
-                                        <li><a href="line-charts.html">Line Charts</a></li>
-                                        <li><a href="area-charts.html">Area Charts</a></li>
+                                    <a data-toggle="collapse" data-target="#mobile-nxb" href="#"><i class="notika-icon notika-bar-chart" style="margin-right: 8px;"></i>Quản Lý NXB</a>
+                                    <ul id="mobile-nxb" class="collapse dropdown-header-top">
+                                        <li><a href="/NXB/Index">Danh Sách</a></li>
+                                        <li><a href="/NXB/Create">Thêm Mới</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#demodepart" href="#">Tables</a>
-                                    <ul id="demodepart" class="collapse dropdown-header-top">
-                                        <li><a href="normal-table.html">Normal Table</a></li>
-                                        <li><a href="data-table.html">Data Table</a></li>
+                                    <a data-toggle="collapse" data-target="#mobile-muon" href="#"><i class="notika-icon notika-windows" style="margin-right: 8px;"></i>Quản Lý Mượn</a>
+                                    <ul id="mobile-muon" class="collapse dropdown-header-top">
+                                        <li><a href="/PhieuMuon/Index">Danh Sách</a></li>
+                                        <li><a href="/PhieuMuon/Create">Thêm Mới</a></li>
+                                        <li><a href="/SinhVien/Index">Danh Sách Sinh Viên</a></li>
+                                        <li><a href="/SinhVien/Create">Thêm Sinh Viên</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#demo" href="#">Forms</a>
-                                    <ul id="demo" class="collapse dropdown-header-top">
-                                        <li><a href="form-elements.html">Form Elements</a></li>
-                                        <li><a href="form-components.html">Form Components</a></li>
-                                        <li><a href="form-examples.html">Form Examples</a></li>
+                                    <a data-toggle="collapse" data-target="#mobile-vitri" href="#"><i class="notika-icon notika-form" style="margin-right: 8px;"></i>Quản Lý Vị Trí</a>
+                                    <ul id="mobile-vitri" class="collapse dropdown-header-top">
+                                        <li><a href="/ViTri/Index">Danh Sách</a></li>
+                                        <li><a href="/ViTri/Create">Thêm Mới</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">App views</a>
-                                    <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
-                                        <li>
-                                            <a href="notification.html">Notifications</a>
-                                        </li>
-                                        <li>
-                                            <a href="alert.html">Alerts</a>
-                                        </li>
-                                        <li>
-                                            <a href="modals.html">Modals</a>
-                                        </li>
-                                        <li>
-                                            <a href="buttons.html">Buttons</a>
-                                        </li>
-                                        <li>
-                                            <a href="tabs.html">Tabs</a>
-                                        </li>
-                                        <li>
-                                            <a href="accordion.html">Accordion</a>
-                                        </li>
-                                        <li>
-                                            <a href="dialog.html">Dialogs</a>
-                                        </li>
-                                        <li>
-                                            <a href="popovers.html">Popovers</a>
-                                        </li>
-                                        <li>
-                                            <a href="tooltips.html">Tooltips</a>
-                                        </li>
-                                        <li>
-                                            <a href="dropdown.html">Dropdowns</a>
-                                        </li>
+                                    <a data-toggle="collapse" data-target="#mobile-tacgia" href="#"><i class="notika-icon notika-app" style="margin-right: 8px;"></i>Quản Lý Tác Giả</a>
+                                    <ul id="mobile-tacgia" class="collapse dropdown-header-top">
+                                        <li><a href="/TacGia/Index">Danh Sách</a></li>
+                                        <li><a href="/TacGia/Create">Thêm Mới</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a data-toggle="collapse" data-target="#Pagemob" href="#">Pages</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li>
-                                            <a href="contact.html">Contact</a>
-                                        </li>
-                                        <li>
-                                            <a href="invoice.html">Invoice</a>
-                                        </li>
-                                        <li>
-                                            <a href="typography.html">Typography</a>
-                                        </li>
-                                        <li>
-                                            <a href="color.html">Color</a>
-                                        </li>
-                                        <li>
-                                            <a href="login-register.html">Login Register</a>
-                                        </li>
-                                        <li>
-                                            <a href="404.html">404 Page</a>
-                                        </li>
+                                    <a data-toggle="collapse" data-target="#mobile-user" href="#"><i class="notika-icon notika-support" style="margin-right: 8px;"></i>Quản Lý Tài Khoản</a>
+                                    <ul id="mobile-user" class="collapse dropdown-header-top">
+                                        <li><a href="/User/Index">Danh Sách</a></li>
+                                        <li><a href="/User/Create">Thêm Mới</a></li>
                                     </ul>
                                 </li>
                             </ul>

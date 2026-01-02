@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ThuVien.Models;
+using PagedList;
 
 namespace ThuVien.Controllers
 {
@@ -15,10 +16,12 @@ namespace ThuVien.Controllers
         private Model1 db = new Model1();
 
         // GET: PhieuMuon
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var phieuMuons = db.PhieuMuons.Include(p => p.SinhVien);
-            return View(phieuMuons.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            var phieuMuons = db.PhieuMuons.Include(p => p.SinhVien).OrderByDescending(p => p.NgayMuon);
+            return View(phieuMuons.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: PhieuMuon/Details/5

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ThuVien.Models;
+using PagedList;
 
 namespace ThuVien.Controllers
 {
@@ -15,9 +16,12 @@ namespace ThuVien.Controllers
         private Model1 db = new Model1();
 
         // GET: ViTri
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.ViTris.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            var viTris = db.ViTris.OrderBy(v => v.ID);
+            return View(viTris.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: ViTri/Details/5

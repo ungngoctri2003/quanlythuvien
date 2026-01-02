@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ThuVien.Models;
 using System.Security.Cryptography;
 using System.Text;
+using PagedList;
 
 namespace ThuVien.Controllers
 {
@@ -17,9 +18,12 @@ namespace ThuVien.Controllers
         private Model1 db = new Model1();
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Users.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            var users = db.Users.OrderBy(u => u.ID);
+            return View(users.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Users/Details/5

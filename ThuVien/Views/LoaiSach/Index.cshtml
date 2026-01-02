@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ThuVien.Models.LoaiSach>
+﻿@model PagedList.IPagedList<ThuVien.Models.LoaiSach>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Danh Sách Loại Sách";
@@ -55,6 +56,22 @@
                             }
                         </tbody>
                     </table>
+                    <div style="margin-top: 20px;">
+                        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), 
+                            new PagedListRenderOptions 
+                            { 
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                MaximumPageNumbersToDisplay = 5,
+                                LinkToFirstPageFormat = "Đầu",
+                                LinkToLastPageFormat = "Cuối",
+                                LinkToPreviousPageFormat = "Trước",
+                                LinkToNextPageFormat = "Sau"
+                            })
+                    </div>
                 }
                 else
                 {

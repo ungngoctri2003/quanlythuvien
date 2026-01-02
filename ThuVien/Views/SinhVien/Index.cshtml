@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ThuVien.Models.SinhVien>
+﻿@model PagedList.IPagedList<ThuVien.Models.SinhVien>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Danh Sách Sinh Viên";
@@ -14,9 +15,9 @@
 <div class="page-container">
     <div class="container">
         <div class="content-wrapper">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="page-header-title-section" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h3 style="margin: 0; color: #667eea;">Quản lý sinh viên</h3>
-                @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary", style = "color: #000;" })
+                @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary", style = "color: white;" })
             </div>
 
             <div class="table-wrapper">
@@ -53,6 +54,22 @@
                             }
                         </tbody>
                     </table>
+                    <div style="margin-top: 20px;">
+                        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), 
+                            new PagedListRenderOptions 
+                            { 
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                MaximumPageNumbersToDisplay = 5,
+                                LinkToFirstPageFormat = "Đầu",
+                                LinkToLastPageFormat = "Cuối",
+                                LinkToPreviousPageFormat = "Trước",
+                                LinkToNextPageFormat = "Sau"
+                            })
+                    </div>
                 }
                 else
                 {
