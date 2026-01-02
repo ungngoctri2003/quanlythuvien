@@ -142,7 +142,6 @@
     <Compile Include="Controllers\SachController.cs" />
     <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Controllers\TacGiaController.cs" />
-    <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ViTriController.cs" />
     <Compile Include="Global.asax.cs">
@@ -508,7 +507,6 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\ThongKe\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
