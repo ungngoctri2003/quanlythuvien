@@ -1,0 +1,108 @@
+@{
+    ViewBag.Title = "Thống Kê";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thống Kê Thư Viện</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoSach</span></h2>
+                    <p>Tổng Số Sách</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoLoaiSach</span></h2>
+                    <p>Tổng Số Loại Sách</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoNXB</span></h2>
+                    <p>Tổng Số Nhà Xuất Bản</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoTacGia</span></h2>
+                    <p>Tổng Số Tác Giả</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoViTri</span></h2>
+                    <p>Tổng Số Vị Trí</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoSinhVien</span></h2>
+                    <p>Tổng Số Sinh Viên</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoPhieuMuon</span></h2>
+                    <p>Tổng Số Phiếu Mượn</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.TongSoUser</span></h2>
+                    <p>Tổng Số User</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h2><span class="counter">@ViewBag.ThongKe.PhieuMuonChuaTra</span></h2>
+                    <p>Phiếu Mượn Chưa Trả</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 30px;">
+    <div class="col-md-12">
+        <div class="notika-shadow">
+            <div class="sale-statistic-inner">
+                <h3>Thống Kê Chi Tiết</h3>
+                <hr />
+                <p><strong>Tổng số sách trong thư viện:</strong> @ViewBag.ThongKe.TongSoSach cuốn</p>
+                <p><strong>Tổng số loại sách:</strong> @ViewBag.ThongKe.TongSoLoaiSach loại</p>
+                <p><strong>Tổng số nhà xuất bản:</strong> @ViewBag.ThongKe.TongSoNXB nhà xuất bản</p>
+                <p><strong>Tổng số tác giả:</strong> @ViewBag.ThongKe.TongSoTacGia tác giả</p>
+                <p><strong>Tổng số vị trí:</strong> @ViewBag.ThongKe.TongSoViTri vị trí</p>
+                <p><strong>Tổng số sinh viên:</strong> @ViewBag.ThongKe.TongSoSinhVien sinh viên</p>
+                <p><strong>Tổng số phiếu mượn:</strong> @ViewBag.ThongKe.TongSoPhieuMuon phiếu</p>
+                <p><strong>Tổng số user:</strong> @ViewBag.ThongKe.TongSoUser user</p>
+                <p><strong>Phiếu mượn chưa trả:</strong> @ViewBag.ThongKe.PhieuMuonChuaTra phiếu</p>
+            </div>
+        </div>
+    </div>
+</div>
+
